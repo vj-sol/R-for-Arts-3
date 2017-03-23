@@ -478,36 +478,36 @@ ggplotly(scatter)  </code></pre>
   </aside>
 </section>
 <section align='center' style='font-size:80%'>
-    <h2>
-      Anatomy of a <span style=text-transform:lowercase>ggplot</span> call
-    </h2>
-  </section>
+  <h2>
+    Anatomy of a <span style=text-transform:lowercase>ggplot</span> call
+  </h2>
+</section>
 
-  <section>
-    <h3>
-      Work that <pre style=text-transform:lowercase;display:inline><code class='r' style=text-transform:lowercase;display:inline>aes()</code></pre>
-    </h3>
+<section>
+  <h3>
+    Work that <pre style=text-transform:lowercase;display:inline><code class='r' style=text-transform:lowercase;display:inline>aes()</code></pre>
+  </h3>
 
-    Many common ggplot tasks can be accomplished by adjusting the terms within the <pre style=display:inline><code style=display:inline class='r'>aes()</code></pre>
-    <p>
-      It is in this function that we define what is on our axes
-    </p>
-    <pre><code class='r'>ggplot(data = mtcars, aes(x = mpg, y = hp))</code></pre>
-    <p>
-      And how we want to represent our data elements
-    </p>
-    <pre><code class='r'>ggplot(data = mtcars, aes(x = mpg, y = hp, colour = as.factor(vs), shape = as.factor(gear)))</code></pre>
+  Many common ggplot tasks can be accomplished by adjusting the terms within the <pre style=display:inline><code style=display:inline class='r'>aes()</code></pre>
+  <p>
+    It is in this function that we define what is on our axes
+  </p>
+  <pre><code class='r'>ggplot(data = mtcars, aes(x = mpg, y = hp))</code></pre>
+  <p>
+    And how we want to represent our data elements
+  </p>
+  <pre><code class='r'>ggplot(data = mtcars, aes(x = mpg, y = hp, colour = as.factor(vs), shape = as.factor(gear)))</code></pre>
 
-      Note that both of these pieces of code will NOT work without a <pre style=display:inline><code style=display:inline class='r'>geom()</code></pre>
-<br/>
-    <br/>
-      Also, all aesthetics here have been defined globally.
-    <p>
-      A full list of aesthetic specifications can be found <a href='http://docs.ggplot2.org/current/vignettes/ggplot2-specs.html'>here</a>
-    </p>
-    <aside class='notes'>
-    </aside>
-  </section>
+  Note that both of these pieces of code will NOT work without a <pre style=display:inline><code style=display:inline class='r'>geom()</code></pre>
+  <br/>
+  <br/>
+  Also, all aesthetics here have been defined globally.
+  <p>
+    A full list of aesthetic specifications can be found <a href='http://docs.ggplot2.org/current/vignettes/ggplot2-specs.html'>here</a>
+  </p>
+  <aside class='notes'>
+  </aside>
+</section>
 
 <section>
   <h3>
@@ -538,7 +538,7 @@ ggplotly(scatter)  </code></pre>
   <pre><code class='r'>ggplot(data = mtcars, aes(x = mpg, y = hp, colour = as.factor(vs), shape = as.factor(gear))) +
   geom_point()</code></pre>
   <div align='center'>
-  <img src='./resources/plot1-eg.svg' style='border:0' width='50%'/>
+    <img src='./resources/plot1-eg.svg' style='border:0' width='50%'/>
   </div>
 </section>
 
@@ -552,7 +552,7 @@ ggplotly(scatter)  </code></pre>
   <pre><code class='r'>ggplot(data = mtcars) +
   geom_point(aes(x = mpg, y = hp, colour = as.factor(vs), shape = as.factor(gear)))</code></pre>
   <div align='center'>
-  <img src='./resources/plot1-eg.svg' style='border:0' width='50%'/>
+    <img src='./resources/plot1-eg.svg' style='border:0' width='50%'/>
   </div>
 </section>
 
@@ -561,20 +561,20 @@ ggplotly(scatter)  </code></pre>
     Joining things up
   </h3>
   <div style='font-size:60%'>
-  <p>
-    In the above examples, both locally and globally defined aesthetics produce the same result.
-  </p>
-  <p>
-    However, they can be used to overlay data.
-  </p>
-  <pre><code class='r'>ggplot(data = mtcars, aes(x = mpg, y = hp, colour = as.factor(vs), shape = as.factor(gear))) +
+    <p>
+      In the above examples, both locally and globally defined aesthetics produce the same result.
+    </p>
+    <p>
+      However, they can be used to overlay data.
+    </p>
+    <pre><code class='r'>ggplot(data = mtcars, aes(x = mpg, y = hp, colour = as.factor(vs), shape = as.factor(gear))) +
 + geom_point()+
 + geom_dotplot(aes(x=mpg,y=hp,fill=as.factor(vs)))
 #`stat_bindot()` using `bins = 30`. Pick better value with `binwidth`.
 </code></pre>
-    </div>
+  </div>
   <div align='center'>
-  <img src='./resources/plot2-eg.svg' style='border:0' width='50%'/>
+    <img src='./resources/plot2-eg.svg' style='border:0' width='50%'/>
   </div>
 </section>
 
@@ -603,12 +603,12 @@ ggsave( 'my-plot.svg' , my_plot ) # requires svglite package</code></pre>
 <pre style=display:inline><code style=display:inline class='r'>ggsave()</code></pre> is rather clever and infers the file format from the file extension.
 </section>
 
-<section>
-  <h3>
-    saving using R
-  </h3>
-  Naturally, R also has functions to save images to file. The two that I use the most are <pre style=display:inline><code style=display:inline class='r'>pdf()</code></pre> and <pre style=display:inline><code style=display:inline class='r'>svg()</code></pre>
-  <pre><code class='r'>my_plot <- ggplot( mtcars, aes( mpg , hp) +
+  <section>
+    <h3>
+      saving using R
+    </h3>
+    Naturally, R also has functions to save images to file. The two that I use the most are <pre style=display:inline><code style=display:inline class='r'>pdf()</code></pre> and <pre style=display:inline><code style=display:inline class='r'>svg()</code></pre>
+    <pre><code class='r'>my_plot <- ggplot( mtcars, aes( mpg , hp) +
   geom_point()
 
 pdf('my-plot.pdf')
@@ -623,96 +623,96 @@ dev.off()
 Note that with these functions, you must close the graphics device after producing the image.
 </section>
 
-</section>
-
-
-
-
-<!--    NEW TOP LEVEL SLIDE      -->
-<section align='left'>
-
-  <section align='center'>
-    <h2>
-      Trend lines &amp; Error bars
-    </h2>
   </section>
 
-  <section>
-    <h3>
-      Trend Lines: <pre style='display:inline;text-transform:lowercase'><code style='display:inline;text-transform:lowercase' class='r'>geom_smooth()</code></pre>
-    </h3>
-    <div style='font-size:70%'>
-    ggplot2 has a built in <pre  style='display:inline'><code style='display:inline' class='r'>geom()</code></pre> that deals with adding trend lines to plots.
-    It is called <pre  style='display:inline' ><code  style='display:inline' class='r'>geom_smooth()</code></pre>
-    <pre><code class='r'>ggplot( mtcars , aes( x = mpg , y = hp)) +
+
+
+
+  <!--    NEW TOP LEVEL SLIDE      -->
+  <section align='left'>
+
+    <section align='center'>
+      <h2>
+        Trend lines &amp; Error bars
+      </h2>
+    </section>
+
+    <section>
+      <h3>
+        Trend Lines: <pre style='display:inline;text-transform:lowercase'><code style='display:inline;text-transform:lowercase' class='r'>geom_smooth()</code></pre>
+      </h3>
+      <div style='font-size:70%'>
+        ggplot2 has a built in <pre  style='display:inline'><code style='display:inline' class='r'>geom()</code></pre> that deals with adding trend lines to plots.
+        It is called <pre  style='display:inline' ><code  style='display:inline' class='r'>geom_smooth()</code></pre>
+        <pre><code class='r'>ggplot( mtcars , aes( x = mpg , y = hp)) +
     geom_point() +
     geom_smooth()
 #`geom_smooth()` using method = 'loess'
 </code></pre>
       </div>
-    <div align='center'>
-    <img src='./resources/plot3-eg.svg'style='border:0' width=50%/>
-    </div>
-  </section>
+      <div align='center'>
+        <img src='./resources/plot3-eg.svg'style='border:0' width=50%/>
+      </div>
+    </section>
 
-  <section>
-    <h3>
-      Trend Lines: <pre style='display:inline;text-transform:lowercase'><code style='display:inline;text-transform:lowercase' class='r'>geom_smooth()</code></pre>
-    </h3>
-    <div style='font-size:70%'>
-    As with all geoms, <pre style=display:inline><code style=display:inline class='r'>geom_smooth()</code></pre> is responsive to aesthetics.
-    <pre><code class='r'>ggplot( mtcars , aes( x = mpg , y = hp)) +
+    <section>
+      <h3>
+        Trend Lines: <pre style='display:inline;text-transform:lowercase'><code style='display:inline;text-transform:lowercase' class='r'>geom_smooth()</code></pre>
+      </h3>
+      <div style='font-size:70%'>
+        As with all geoms, <pre style=display:inline><code style=display:inline class='r'>geom_smooth()</code></pre> is responsive to aesthetics.
+        <pre><code class='r'>ggplot( mtcars , aes( x = mpg , y = hp)) +
     geom_point() +
     geom_smooth( aes( colour = as.factor(vs) ))
 #`geom_smooth()` using method = 'loess'
 </code></pre>
       </div>
-    <div align='center'>
-    <img src='./resources/plot4-eg.svg'style='border:0' width=50%/>
-    </div>
-  </section>
+      <div align='center'>
+        <img src='./resources/plot4-eg.svg'style='border:0' width=50%/>
+      </div>
+    </section>
 
-  <section>
-    <h3>
-      Trend Lines: <pre style='display:inline;text-transform:lowercase'><code style='display:inline;text-transform:lowercase' class='r'>geom_smooth()</code></pre>
-    </h3>
-    <div style='font-size:70%'>
-    <pre style=display:inline><code style=display:inline class='r'>geom_smooth()</code></pre> aims to select the best smoothing method for your data but you can override this choice.
-    <pre><code class='r'>ggplot( mtcars , aes( x = mpg , y = hp)) +
+    <section>
+      <h3>
+        Trend Lines: <pre style='display:inline;text-transform:lowercase'><code style='display:inline;text-transform:lowercase' class='r'>geom_smooth()</code></pre>
+      </h3>
+      <div style='font-size:70%'>
+        <pre style=display:inline><code style=display:inline class='r'>geom_smooth()</code></pre> aims to select the best smoothing method for your data but you can override this choice.
+        <pre><code class='r'>ggplot( mtcars , aes( x = mpg , y = hp)) +
     geom_point() +
     geom_smooth( aes( colour = as.factor(vs) ) , method='lm')
 </code></pre>
       </div>
-    <div align='center'>
-    <img src='./resources/plot5-eg.svg'style='border:0' width=50%/>
-    </div>
-  </section>
+      <div align='center'>
+        <img src='./resources/plot5-eg.svg'style='border:0' width=50%/>
+      </div>
+    </section>
 
-  <section>
-    <h3>
-      Trend Lines: custom
-    </h3>
-    <div style='font-size:70%'>
-    If you want to add a line from a custom analysis you can use <pre style=display:inline><code style=display:inline class='r'>geom_abline()</code></pre>, provided that you know the intercept and slope of the line.
-    However, for most basic analyses, <pre style=display:inline><code style=display:inline class='r'>geom_smooth()</code></pre> is a better option.
-    <pre><code class='r'>ggplot( mtcars , aes( x = mpg , y = hp)) +
+    <section>
+      <h3>
+        Trend Lines: custom
+      </h3>
+      <div style='font-size:70%'>
+        If you want to add a line from a custom analysis you can use <pre style=display:inline><code style=display:inline class='r'>geom_abline()</code></pre>, provided that you know the intercept and slope of the line.
+        However, for most basic analyses, <pre style=display:inline><code style=display:inline class='r'>geom_smooth()</code></pre> is a better option.
+        <pre><code class='r'>ggplot( mtcars , aes( x = mpg , y = hp)) +
     geom_point() +
     geom_abline(intercept = 250 , slope = -5)
 </code></pre>
       </div>
-    <div align='center'>
-    <img src='./resources/abline-plot.svg'style='border:0' width=50%/>
-    </div>
-  </section>
+      <div align='center'>
+        <img src='./resources/abline-plot.svg'style='border:0' width=50%/>
+      </div>
+    </section>
 
-  <section>
-    <h3>
-      Error bars
-    </h3>
-    <p>
-      Adding error bars to a plot is just like adding another layer/geom, you just need to calculate the values.
-    </p>
-    <pre><code class='r'>library(psych) # Load in psych package for descriptive stats
+    <section>
+      <h3>
+        Error bars
+      </h3>
+      <p>
+        Adding error bars to a plot is just like adding another layer/geom, you just need to calculate the values.
+      </p>
+      <pre><code class='r'>library(psych) # Load in psych package for descriptive stats
 
 # get means
 mpg_gear_mean <- c( describe( mtcars$mpg[ mtcars$gear == 3 ] )$mean , describe( mtcars$mpg[ mtcars$gear == 4 ] )$mean , describe( mtcars$mpg[ mtcars$gear == 5 ] )$mean )
@@ -729,426 +729,447 @@ mpg_gear$sd <- c( sd( mtcars$mpg[ mtcars$gear == 3 ] ) , sd( mtcars$mpg[ mtcars$
 </code></pre>
   </section>
 
-    <section>
-      <h3>
-        se bars: producing the plot
-      </h3>
-      <div style='font-size:80%'>
-      We now use the subset of data we created in the last slide to produce our plot with se bars
-      <pre><code class='r'>ggplot( mpg_gear , aes(gear , mpg_gear_mean , fill = as.factor(gear)))+
+      <section>
+        <h3>
+          se bars: producing the plot
+        </h3>
+        <div style='font-size:80%'>
+          We now use the subset of data we created in the last slide to produce our plot with se bars
+          <pre><code class='r'>ggplot( mpg_gear , aes(gear , mpg_gear_mean , fill = as.factor(gear)))+
   geom_bar( stat = 'identity')+
   geom_errorbar( aes( ymax = mpg_gear_mean + se, ymin = mpg_gear_mean - se) , width = 0.25)</code></pre>
-      </div>
-      <div align='center'>
-      <img src='./resources/plot6-eg.svg' width='50%' style='border:0'/>
-      </div>
-    </section>
+        </div>
+        <div align='center'>
+          <img src='./resources/plot6-eg.svg' width='50%' style='border:0'/>
+        </div>
+      </section>
 
-    <section>
-      <h3>
-        sd bars: producing the plot
-      </h3>
-      <div style='font-size:80%'>
-      We now use the subset of data we created in the last slide to produce our plot with sd bars
-      <pre><code class='r'>ggplot( mpg_gear , aes(gear , mpg_gear_mean , fill = as.factor(gear)))+
+      <section>
+        <h3>
+          sd bars: producing the plot
+        </h3>
+        <div style='font-size:80%'>
+          We now use the subset of data we created in the last slide to produce our plot with sd bars
+          <pre><code class='r'>ggplot( mpg_gear , aes(gear , mpg_gear_mean , fill = as.factor(gear)))+
   geom_bar( stat = 'identity')+
   geom_errorbar( aes( ymax = mpg_gear_mean + sd , ymin = mpg_gear_mean - sd) , width = 0.25)</code></pre>
-      </div>
-      <div align='center'>
-      <img src='./resources/plot7-eg.svg' width='50%' style='border:0'/>
-      </div>
+        </div>
+        <div align='center'>
+          <img src='./resources/plot7-eg.svg' width='50%' style='border:0'/>
+        </div>
+      </section>
+
     </section>
 
-</section>
 
 
 
+    <!--    NEW TOP LEVEL SLIDE      -->
+    <section align='left'>
+      <section>
+        <h2 align='center'>
+          Labelling &amp; text
+        </h2>
+      </section>
 
-<!--    NEW TOP LEVEL SLIDE      -->
-<section align='left'>
-  <section>
-    <h2 align='center'>
-      Labelling &amp; text
-    </h2>
-  </section>
+      <section>
+        <h3>
+          Labelling
+        </h3>
+        <div style='font-size:70%'>
+          <p>
+            ggplot2 would be a pretty rubbish package if it didn't allow for custom labels.
+          </p>
+          Changing labels in ggplot2 is pretty straightforward and is similar to adding a geom.
+          To do this, we use the <pre style='display:inline'><code style='display:inline' class='r'>labs()</code></pre> ggplot funtion.
+        </div>
+        <table style='font-size:80%'>
+          <thead><th>Code</th><th>Function</th></thead>
+          <tbody>
+            <tr><td><pre><code class='r'>labs(x = 'x label')</code></pre></td><td>Set the x axis label</td></tr>
+            <tr><td><pre><code class='r'>labs(y = 'y label')</code></pre></td><td>Set the y axis label</td></tr>
+            <tr><td><pre><code class='r'>labs(colour = 'gear')</code></pre></td><td>Set the legend title <small>(provided that you grouped by the colour aesthetic)</small></td></tr>
+            <tr><td><pre><code class='r'>labs(title = 'Plot Title')</code></pre></td><td>Set the plot title</td></tr>
+            <tr><td><pre><code class='r'>labs(subtitle = 'Plot Subtitle')</code></pre></td><td>Set the plot subtitle</td></tr>
+            <tr><td><pre><code class='r'>labs(caption = 'Caption')</code></pre></td><td>Set the plot caption</td></tr>
+          </tbody>
+        </table>
+      </section>
 
-  <section>
-  <h3>
-    Labelling
-    </h3>
-    <div style='font-size:70%'>
-    <p>
-      ggplot2 would be a pretty rubbish package if it didn't allow for custom labels.
-    </p>
-    Changing labels in ggplot2 is pretty straightforward and is similar to adding a geom.
-    To do this, we use the <pre style='display:inline'><code style='display:inline' class='r'>labs()</code></pre> ggplot funtion.
-  </div>
-    <table style='font-size:80%'>
-      <thead><th>Code</th><th>Function</th></thead>
-      <tbody>
-        <tr><td><pre><code class='r'>labs(x = 'x label')</code></pre></td><td>Set the x axis label</td></tr>
-        <tr><td><pre><code class='r'>labs(y = 'y label')</code></pre></td><td>Set the y axis label</td></tr>
-        <tr><td><pre><code class='r'>labs(colour = 'gear')</code></pre></td><td>Set the legend title <small>(provided that you grouped by the colour aesthetic)</small></td></tr>
-        <tr><td><pre><code class='r'>labs(title = 'Plot Title')</code></pre></td><td>Set the plot title</td></tr>
-        <tr><td><pre><code class='r'>labs(subtitle = 'Plot Subtitle')</code></pre></td><td>Set the plot subtitle</td></tr>
-        <tr><td><pre><code class='r'>labs(caption = 'Caption')</code></pre></td><td>Set the plot caption</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-  <section>
-    <h3>
-      Labelling in practice
-    </h3>
-    <div style='font-size:80%'>
-      All of the labelling options can be compressed into one call to the <pre style='display:inline'><code style='display:inline' class='r'>labs()</code></pre> function, e.g.
-    <pre><code class='r'>ggplot( mtcars , aes( x = mpg , y = hp , colour = as.factor( gear ))) +
+      <section>
+        <h3>
+          Labelling in practice
+        </h3>
+        <div style='font-size:80%'>
+          All of the labelling options can be compressed into one call to the <pre style='display:inline'><code style='display:inline' class='r'>labs()</code></pre> function, e.g.
+          <pre><code class='r'>ggplot( mtcars , aes( x = mpg , y = hp , colour = as.factor( gear ))) +
   geom_point()+
-  labs(x = 'Miles per Gallon' , y = 'Horse Power' , colour = 'Number of\ngears' , title = 'My first ggplot' , subtitle = 'Gee, I sure do love ggplot!', caption = 'I\'m not sure where all the cats are though')
+  labs(x = 'Miles per Gallon' , y = 'Horse Power' , colour = 'Number of\ngears' , title = 'My first ggplot' , subtitle = 'Gee, I sure do love ggplot!', caption = 'Not too sure where all the cats are though')
 </code></pre>
-    </div>
-    <div align='center'>
-    <img src='./resources/label-plot.svg' style='border:0' width='50%'/>
-  </div>
-  </section>
+        </div>
+        <div align='center'>
+          <img src='./resources/label-plot.svg' style='border:0' width='50%'/>
+        </div>
+      </section>
 
-  <section>
-    <h3>
-      Adding a text overlay
-    </h3>
-    <div style='font-size:70%'>
-      Sometimes you might want to add a text overlay (eg. an r<sup>2</sup> value or a p value).
-      We can do this using <pre style='display:inline'><code style='display:inline'class='r'>annotate()</code></pre>
-    <pre><code class='r'>library(Hmisc)
+      <section>
+        <h3>
+          Adding a text overlay
+        </h3>
+        <div style='font-size:70%'>
+          Sometimes you might want to add a text overlay (eg. an r<sup>2</sup> value or a p value).
+          We can do this using <pre style='display:inline'><code style='display:inline'class='r'>annotate()</code></pre>
+          <pre><code class='r'>library(Hmisc)
 cor_vals <- rcorr( mtcars$mpg , mtcars$hp)
 ggplot( mtcars , aes( x = mpg , y = hp)) +
-geom_point() +
-geom_smooth( method = 'lm' , se = FALSE ) +
-annotate('text' , x = 30 , y = 300 , label = paste('R^2 == ' , round(cor_vals$r[1,2],3) , sep=''), parse = T) +
-annotate('text' , x = 30 , y = 280 , label = paste('p ==', round(cor_vals$P[1,2],8) , sep=''), parse = T) +
-labs(x = 'Miles per Gallon' , y = 'Horse Power' , title = 'My first ggplot' , subtitle = 'Gee, I sure do love ggplot!', caption = 'I\'m not sure where all the cats are though')+
-theme_classic()
-</code></pre>
+  geom_point() +
+  geom_smooth( method = 'lm' , se = FALSE ) +
+  annotate('text' , x = 30 , y = 300 , label = paste('R^2 == ' , round(cor_vals$r[1,2],3) , sep=''), parse = T) +
+  annotate('text' , x = 30 , y = 280 , label = paste('p ==', round(cor_vals$P[1,2],8) , sep=''), parse = T) +
+  labs(x = 'Miles per Gallon' , y = 'Horse Power' , title = 'My first ggplot' , subtitle = 'Gee, I sure do love ggplot!', caption = 'Not too sure where all the cats are though') +
+  theme_classic()</code></pre>
   </div>
-    <div align='center'>
-    <img src='./resources/cor-plot-annote.svg' style='border:0' width='40%'/>
-  </div>
+          <div align='center'>
+            <img src='./resources/cor-plot-annote.svg' style='border:0' width='40%'/>
+          </div>
+          </section>
+
+      </section>
+
+
+
+
+
+      <!--    NEW TOP LEVEL SLIDE      -->
+      <section align='left'>
+        <section>
+          <h2 align='center'>
+            interactive graphs
+          </h2>
+        </section>
+
+        <section>
+          <h3>
+            Interactive Graphs
+          </h3>
+          <p>
+            R has a lot of advanced functionality for producing interactive graphics.
+            we can only offer a cursory glance into the full capabilities here.
+          </p>
+          <table>
+            <tr>
+              <td>
+                <p>
+                  However, a good place to start is with the plotly package.
+                </p>
+              </td>
+              <td style='vertical-align:top'>
+                <img src='./resources/plotly.png' style='border:0;float:right'/>
+              </td>
+            </tr>
+          </table>
+
+
+        </section>
+
+        <section>
+          <h3>
+            Interactive Graphs
+          </h3>
+
+          plotly has the built-in function <pre style=display:inline><code style=display:inline class='r'>ggplotly()</code></pre> for conversion of ggplot objects to interactive html files.
+          <p>
+            For instance, if we produce a simple ggplot object:
+          </p>
+          <pre><code class='r'>my_plot <- ggplot( mtcars , aes( mpg , hp , colour = as.factor(gear))) +
+  geom_point() +
+  theme_minimal()</code></pre>
+  <p>
+  It can be turned into an interactive plot by calling the following:
+  </p>
+  <pre><code class='r'>library(plotly)
+  ggplotly(my_plot)</code></pre>
   </section>
 
-  </section>
+          <section>
+            <h3>
+              Interactive Graphs
+            </h3>
+            <p>
+              The code on the previous slide produces the following graph
+            </p>
+            <iframe src='./resources/int_plot/int-plot.html' class='stretch'>
+            </iframe>
+
+          </section>
+
+          <section>
+            <h3>
+              3D Graphs
+            </h3>
+            <p>
+              plotly can also render 3D interactive graphics:
+            </p>
+            <iframe src='./resources/int_plot/volcano.html' class='stretch'>
+            </iframe>
+            <pre><code>add_surface(plot_ly(z = ~volcano))</code></pre>
+          </section>
+
+          <section>
+            <p>
+              Both R and plotly have a number of advanced functions for generating interactive graphs.
+            </p>
+            <p>
+              What we have endeavoured to do here is to demonstrate how simple it can be.
+            </p>
+          </section>
+
+        </section>
 
 
 
+        <!--    NEW TOP LEVEL SLIDE      -->
+        <section align='left'>
 
+          <section>
+            <h2 align='center'>
+              Report Generation
+            </h2>
+            <aside class='notes'>
 
-  <!--    NEW TOP LEVEL SLIDE      -->
-  <section align='left'>
-    <section>
-      <h2 align='center'>
-        interactive graphs
-      </h2>
-    </section>
+            </aside>
+          </section>
+          <section>
+            <h3>
+              Report Generation
+            </h3>
+            <p>
+              R makes it easy to quickly produce a report of your data analysis.
+            </p>
+            <p>
+              This could be for something such as a supervisor meeting, progress review or draft conference submission.
+            </p>
+            <table>
+              <tr>
+                <td>
+                  <p>
+                    To do this, we use the knitr package.
+                  </p>
+                </td>
+                <td style='vertical-align:top'>
+                  <img src='./resources/knit-logo.png' style='border:0'/>
+                </td>
+              </tr>
+            </table>
+          </section>
 
-    <section>
-      <h3>
-        Interactive Graphs
-      </h3>
-      <p>
-        R has a lot of advanced functionality for producing interactive graphics.
-        we can only offer a cursory glance into the full capabilities here.
-      </p>
-      <table>
-        <tr>
-          <td>
-      <p>
-        However, a good place to start is with the plotly package.
-      </p>
-        </td>
-            <td style='vertical-align:top'>
-      <img src='./resources/plotly.png' style='border:0;float:right'/>
-      </td>
-        </tr>
-      </table>
+          <section>
+            <h3>
+              Knitr
+            </h3>
+            <p>
+              Knitr can output reports in a variety of formats (including .tex for LaTeX users) but two of the most useful formats are likely to be .pdf and .html
+            </p>
+            <p>
+              Knitr, like ggplot and plotly, has a lot of advanced functionality but here we will focus on just two functions:
+            </p>
+            <pre><code class='r'># 1
+  stitch()
 
+  # 2
+  stitch_rhtml()</code></pre>
+          </section>
 
-    </section>
+          <section>
+            <h3>
+              Knitr
+            </h3>
+            <p>
+              To use these report generation functions, you must have a script.
+            </p>
+            <p>
+              For demonstration purposes, we will use the following script
+            </p>
+            <pre><code class='r'>##title: Check out my fancy report
+  ##author: Vijay
 
-    <section>
-      <h3>
-        Interactive Graphs
-      </h3>
+  # Here is some text
+  library(ggplot2)
+  ggplot(mtcars,aes(mpg,hp,colour=as.factor(gear)))+
+  geom_point()
+  # Here is more text</code></pre>
+          </section>
 
-        plotly has the built-in function <pre style=display:inline><code style=display:inline class='r'>ggplotly()</code></pre> for conversion of ggplot objects to interactive html files.
-      <p>
-        For instance, if we produce a simple ggplot object:
-      </p>
-      <pre><code class='r'>my_plot <- ggplot( mtcars , aes( mpg , hp , colour = as.factor(gear))) +
-      geom_point() +
-      theme_minimal()</code></pre>
-      <p>
-      It can be turned into an interactive plot by calling the following:
-      </p>
-      <pre><code class='r'>library(plotly)
-ggplotly(my_plot)</code></pre>
-    </section>
+          <section>
+            <h3>
+              <pre style=text-transform:lowercase;display:inline><code style=text-transform:lowercase;display:inline class='r'>stitch()</code></pre>
+            </h3>
+            Using the <pre style=display:inline><code style=display:inline class='r'>stitch()</code></pre> function is straightforward if you have written a script.
+            <p>
+              The code to produce a pdf is simply:
+            </p>
+            <pre><code class='r'>stitch('my_script.r')</code></pre>
+            <p>
+              If script is not in the working directory, you must specify the location of the file
+            </p>
+          </section>
 
-      <section>
-        <h3>
-          Interactive Graphs
-        </h3>
-        <p>
-          The code on the previous slide produces the following graph
-        </p>
-        <iframe src='./resources/int_plot/int-plot.html' class='stretch'>
-        </iframe>
+<section>
+            <object data='./resources/my_script.pdf' class='stretch'>
+            </object>
 
-      </section>
+          </section>
 
-      <section>
-        <h3>
-          3D Graphs
-        </h3>
-        <p>
-          plotly can also render 3D interactive graphics:
-        </p>
-        <iframe src='./resources/int_plot/volcano.html' class='stretch'>
-        </iframe>
-        <pre><code>add_surface(plot_ly(z = ~volcano))</code></pre>
-      </section>
+          <section>
+            <h3>
+              <pre style=text-transform:lowercase;display:inline><code style=text-transform:lowercase;display:inline class='r'>stitch_rhtml()</code></pre>
+            </h3>
+            Using the <pre style=display:inline><code style=display:inline class='r'>stitch_rhtml()</code></pre> function is straightforward if you have written a script.
+            <p>
+              The code to produce a html file is simply:
+            </p>
+            <pre><code class='r'>stitch_rhtml('my_script.r')</code></pre>
+            <p>
+              If script is not in the working directory, you must specify the location of the file
+            </p>
+          </section>
 
-      <section>
-        <p>
-          Both R and plotly have a number of advanced functions for generating interactive graphs.
-        </p>
-        <p>
-          What we have endeavoured to do here is to demonstrate how simple it can be.
-        </p>
-      </section>
+          <section>
+            <iframe src='./resources/my_script.html' class='stretch'>
+            </iframe>
+          </section>
 
-  </section>
+          <section>
+            <h3>
+              Knitr
+            </h3>
+            <p>
+            Knitr is a powerful report generation tool and the features demonstrated here are really only scratching the surface.
+            </p>
+            <p>
+              It is possible to write entire research papers and websites using packages such as knitr, please do investigate it further.
+            </p>
+          </section>
 
+        </section>
 
+        </div>
+      </div>
 
-  <!--    NEW TOP LEVEL SLIDE      -->
-  <section align='left'>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
 
-    <section>
-      <h2 align='center'>
-        Report Generation
-      </h2>
-      <aside class='notes'>
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        height:800,
+        width:960,
+        margin: 0.1,
+        minScale: 0.2,
+        maxScale:1.5,
+        // Display controls in the bottom right corner
+        controls: true,
 
-      </aside>
-    </section>
-    <section>
-      <h3>
-        Report Generation
-      </h3>
-      <p>
-        R makes it easy to quickly produce a report of your data analysis.
-      </p>
-      <p>
-        This could be for something such as a supervisor meeting, progress review or draft conference submission.
-      </p>
-      <table>
-        <tr>
-          <td>
-      <p>
-        To do this, we use the knitr package.
-      </p>
-          </td>
-          <td style='vertical-align:top'>
-            <img src='./resources/knit-logo.png' style='border:0'/>
-          </td>
-        </tr>
-      </table>
-    </section>
+        // Display a presentation progress bar
+        progress: true,
 
-    <section>
-      <h3>
-        Knitr
-      </h3>
-      <p>
-        Knitr can output reports in a variety of formats (including .tex for LaTeX users) but two of the most useful formats are likely to be .pdf and .html
-      </p>
-      <p>
-        Knitr, like ggplot and plotly, has a lot of advanced functionality but here we will focus on just two functions:
-      </p>
-      <pre><code class='r'># 1
-stitch()
+        // Display the page number of the current slide
+        slideNumber: false,
 
-# 2
-stitch_rhtml()</code></pre>
-    </section>
+        // Push each slide change to the browser history
+        history: true,
 
-    <section>
-      <h3>
-        Knitr
-      </h3>
-      <p>
-        To use these report generation functions, you must have a script.
-      </p>
-      <p>
-        For demonstration purposes, we will use the following script
-      </p>
-      <pre><code class='r'>##title: Check out my fancy report
-##author: Vijay
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
 
-# Here is some text
-library(ggplot2)
-ggplot(mtcars,aes(mpg,hp,colour=as.factor(gear)))+
-	geom_point()
-# Here is more text</code></pre>
-    </section>
+        // Enable the slide overview mode
+        overview: true,
 
+        // Vertical centering of slides
+        center: true,
 
-    <section>
-      <h3>
-        <pre style=text-transform:lowercase;display:inline><code style=text-transform:lowercase;display:inline class='r'>stitch()</code></pre>
-      </h3>
-      Using the <pre style=display:inline><code style=display:inline class='r'>stitch()</code></pre> function is straightforward if you have written a script.
-      <p>
-        The code to produce a pdf is simply:
-      </p>
-      <pre><code class='r'>stitch('my_script.r')</code></pre>
-      <p>
-        If script is not in the working directory, you must specify the location of the file
-      </p>
-    </section>
+        // Enables touch navigation on devices with touch input
+        touch: true,
 
-    <section>
-      <h3>
-        <pre style=text-transform:lowercase;display:inline><code style=text-transform:lowercase;display:inline class='r'>stitch_rhtml()</code></pre>
-      </h3>
-      Using the <pre style=display:inline><code style=display:inline class='r'>stitch_rhtml()</code></pre> function is straightforward if you have written a script.
-      <p>
-        The code to produce a html file is simply:
-      </p>
-      <pre><code class='r'>stitch_rhtml('my_script.r')</code></pre>
-      <p>
-        If script is not in the working directory, you must specify the location of the file
-      </p>
-    </section>
+        // Loop the presentation
+        loop: false,
 
-      </section>
+        // Change the presentation direction to be RTL
+        rtl: false,
 
-    </div>
-  </div>
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
 
-<script src="lib/js/head.min.js"></script>
-<script src="js/reveal.js"></script>
+        // Turns fragments on and off globally
+        fragments: true,
 
-<script>
-  // More info https://github.com/hakimel/reveal.js#configuration
-  Reveal.initialize({
-    height:800,
-    width:960,
-    margin: 0.1,
-    minScale: 0.2,
-    maxScale:1.5,
-    // Display controls in the bottom right corner
-    controls: true,
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
 
-    // Display a presentation progress bar
-    progress: true,
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
 
-    // Display the page number of the current slide
-    slideNumber: false,
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
 
-    // Push each slide change to the browser history
-    history: true,
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
 
-    // Enable keyboard shortcuts for navigation
-    keyboard: true,
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
 
-    // Enable the slide overview mode
-    overview: true,
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: Reveal.navigateNext,
 
-    // Vertical centering of slides
-    center: true,
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
 
-    // Enables touch navigation on devices with touch input
-    touch: true,
+        // Hides the address bar on mobile devices
+        hideAddressBar: true,
 
-    // Loop the presentation
-    loop: false,
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
 
-    // Change the presentation direction to be RTL
-    rtl: false,
+        // Transition style
+        transition: 'concave', // none/fade/slide/convex/concave/zoom
 
-    // Randomizes the order of slides each time the presentation loads
-    shuffle: false,
+        // Transition speed
+        transitionSpeed: 'default', // default/fast/slow
 
-    // Turns fragments on and off globally
-    fragments: true,
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'concave', // none/fade/slide/convex/concave/zoom
 
-    // Flags if the presentation is running in an embedded mode,
-    // i.e. contained within a limited portion of the screen
-    embedded: false,
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
 
-    // Flags if we should show a help overlay when the questionmark
-    // key is pressed
-    help: true,
+        // Parallax background image
+        parallaxBackgroundImage: '', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
 
-    // Flags if speaker notes should be visible to all viewers
-    showNotes: false,
+        // Parallax background size
+        parallaxBackgroundSize: '', // CSS syntax, e.g. "2100px 900px"
 
-    // Number of milliseconds between automatically proceeding to the
-    // next slide, disabled when set to 0, this value can be overwritten
-    // by using a data-autoslide attribute on your slides
-    autoSlide: 0,
+        // Number of pixels to move the parallax background per slide
+        // - Calculated automatically unless specified
+        // - Set to 0 to disable movement along an axis
+        parallaxBackgroundHorizontal: null,
+        parallaxBackgroundVertical: null,
 
-    // Stop auto-sliding after user input
-    autoSlideStoppable: true,
-
-    // Use this method for navigation when auto-sliding
-    autoSlideMethod: Reveal.navigateNext,
-
-    // Enable slide navigation via mouse wheel
-    mouseWheel: false,
-
-    // Hides the address bar on mobile devices
-    hideAddressBar: true,
-
-    // Opens links in an iframe preview overlay
-    previewLinks: false,
-
-    // Transition style
-    transition: 'concave', // none/fade/slide/convex/concave/zoom
-
-    // Transition speed
-    transitionSpeed: 'default', // default/fast/slow
-
-    // Transition style for full page slide backgrounds
-    backgroundTransition: 'concave', // none/fade/slide/convex/concave/zoom
-
-    // Number of slides away from the current that are visible
-    viewDistance: 3,
-
-    // Parallax background image
-    parallaxBackgroundImage: '', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
-
-    // Parallax background size
-    parallaxBackgroundSize: '', // CSS syntax, e.g. "2100px 900px"
-
-    // Number of pixels to move the parallax background per slide
-    // - Calculated automatically unless specified
-    // - Set to 0 to disable movement along an axis
-    parallaxBackgroundHorizontal: null,
-    parallaxBackgroundVertical: null,
-
-    // More info https://github.com/hakimel/reveal.js#dependencies
-    dependencies: [
-      { src: 'lib/js/classList.js', condition: function ()
-       { return !document.body.classList;}},
-      { src: 'plugin/markdown/marked.js' },
-      { src: 'plugin/markdown/markdown.js' },
-      { src: 'plugin/notes/notes.js', async: true },
-      { src: 'plugin/zoom-js/zoom.js', async: true, condition: function () { return !!document.body.classList; } },
-      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-    ]
-  });
-  Reveal.configure({ pdfMaxPagesPerSlide: 1 });
-</script>
-</body>
-</html>
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function ()
+           { return !document.body.classList;}},
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function () { return !!document.body.classList; } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+      Reveal.configure({ pdfMaxPagesPerSlide: 1 });
+    </script>
+    </body>
+  </html>
