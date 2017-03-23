@@ -620,7 +620,7 @@ my_plot
 dev.off()
 </code></pre>
 
-Note that with these functions, you must close the graphics device after producing teh image.
+Note that with these functions, you must close the graphics device after producing the image.
 </section>
 
 </section>
@@ -677,7 +677,7 @@ Note that with these functions, you must close the graphics device after produci
       Trend Lines: <pre style='display:inline;text-transform:lowercase'><code style='display:inline;text-transform:lowercase' class='r'>geom_smooth()</code></pre>
     </h3>
     <div style='font-size:70%'>
-    <pre style=display:inline><code style=display:inline class='r'>geom_smooth()</code></pre> aims to select the best smoothing method fro your data but you can override this choice.
+    <pre style=display:inline><code style=display:inline class='r'>geom_smooth()</code></pre> aims to select the best smoothing method for your data but you can override this choice.
     <pre><code class='r'>ggplot( mtcars , aes( x = mpg , y = hp)) +
     geom_point() +
     geom_smooth( aes( colour = as.factor(vs) ) , method='lm')
@@ -693,7 +693,7 @@ Note that with these functions, you must close the graphics device after produci
       Trend Lines: custom
     </h3>
     <div style='font-size:70%'>
-    If you want to add aline from a custom analysis you can use <pre style=display:inline><code style=display:inline class='r'>geom_abline()</code></pre>, provided that you know the intercept and slope of the line.
+    If you want to add a line from a custom analysis you can use <pre style=display:inline><code style=display:inline class='r'>geom_abline()</code></pre>, provided that you know the intercept and slope of the line.
     However, for most basic analyses, <pre style=display:inline><code style=display:inline class='r'>geom_smooth()</code></pre> is a better option.
     <pre><code class='r'>ggplot( mtcars , aes( x = mpg , y = hp)) +
     geom_point() +
@@ -733,10 +733,12 @@ mpg_gear$sd <- c( sd( mtcars$mpg[ mtcars$gear == 3 ] ) , sd( mtcars$mpg[ mtcars$
       <h3>
         se bars: producing the plot
       </h3>
+      <div style='font-size:80%'>
       We now use the subset of data we created in the last slide to produce our plot with se bars
       <pre><code class='r'>ggplot( mpg_gear , aes(gear , mpg_gear_mean , fill = as.factor(gear)))+
   geom_bar( stat = 'identity')+
   geom_errorbar( aes( ymax = mpg_gear_mean + se, ymin = mpg_gear_mean - se) , width = 0.25)</code></pre>
+      </div>
       <div align='center'>
       <img src='./resources/plot6-eg.svg' width='50%' style='border:0'/>
       </div>
@@ -746,10 +748,12 @@ mpg_gear$sd <- c( sd( mtcars$mpg[ mtcars$gear == 3 ] ) , sd( mtcars$mpg[ mtcars$
       <h3>
         sd bars: producing the plot
       </h3>
+      <div style='font-size:80%'>
       We now use the subset of data we created in the last slide to produce our plot with sd bars
       <pre><code class='r'>ggplot( mpg_gear , aes(gear , mpg_gear_mean , fill = as.factor(gear)))+
   geom_bar( stat = 'identity')+
   geom_errorbar( aes( ymax = mpg_gear_mean + sd , ymin = mpg_gear_mean - sd) , width = 0.25)</code></pre>
+      </div>
       <div align='center'>
       <img src='./resources/plot7-eg.svg' width='50%' style='border:0'/>
       </div>
@@ -784,7 +788,7 @@ mpg_gear$sd <- c( sd( mtcars$mpg[ mtcars$gear == 3 ] ) , sd( mtcars$mpg[ mtcars$
       <tbody>
         <tr><td><pre><code class='r'>labs(x = 'x label')</code></pre></td><td>Set the x axis label</td></tr>
         <tr><td><pre><code class='r'>labs(y = 'y label')</code></pre></td><td>Set the y axis label</td></tr>
-        <tr><td><pre><code class='r'>labs(colour = 'gear')</code></pre></td><td>Set the legend title</td></tr>
+        <tr><td><pre><code class='r'>labs(colour = 'gear')</code></pre></td><td>Set the legend title <small>(provided that you grouped by the colour aesthetic)</small></td></tr>
         <tr><td><pre><code class='r'>labs(title = 'Plot Title')</code></pre></td><td>Set the plot title</td></tr>
         <tr><td><pre><code class='r'>labs(subtitle = 'Plot Subtitle')</code></pre></td><td>Set the plot subtitle</td></tr>
         <tr><td><pre><code class='r'>labs(caption = 'Caption')</code></pre></td><td>Set the plot caption</td></tr>
@@ -812,7 +816,7 @@ mpg_gear$sd <- c( sd( mtcars$mpg[ mtcars$gear == 3 ] ) , sd( mtcars$mpg[ mtcars$
     <h3>
       Adding a text overlay
     </h3>
-    <div style='font-size:80%'>
+    <div style='font-size:70%'>
       Sometimes you might want to add a text overlay (eg. an r<sup>2</sup> value or a p value).
       We can do this using <pre style='display:inline'><code style='display:inline'class='r'>annotate()</code></pre>
     <pre><code class='r'>library(Hmisc)
