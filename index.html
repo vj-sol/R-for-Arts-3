@@ -114,7 +114,7 @@
                     <li type='a'>Checking for complete observations</li>
                     <li type='a'>Dealing with missing values</li>
                     <li type='a'>Selecting data based on data content</li>
-                    <li type='a'>Dealilng with textual data</li>
+                    <li type='a'>Dealing with textual data</li>
                   </ol>
                 </li>
                 <br/>
@@ -513,7 +513,8 @@ ggplotly(scatter)  </code></pre>
   <h3>
     Using <pre style=text-transform:lowercase;display:inline><code class='r' style=text-transform:lowercase;display:inline>geom()</code></pre>
   </h3>
-  This is where we define the type of graph that we want to produce, there are a large number of geoms to choose from.
+  This is where we define the type of graph that we want to produce.
+  There are a large number of geoms to choose from.
   <p>
     Here are a few:
   </p>
@@ -749,7 +750,7 @@ mpg_gear$sd <- c( sd( mtcars$mpg[ mtcars$gear == 3 ] ) , sd( mtcars$mpg[ mtcars$
           sd bars: producing the plot
         </h3>
         <div style='font-size:80%'>
-          We now use the subset of data we created in the last slide to produce our plot with sd bars
+          Using the same subset of data we used to created the se bars, we can produce our plot with sd bars.
           <pre><code class='r'>ggplot( mpg_gear , aes(gear , mpg_gear_mean , fill = as.factor(gear)))+
   geom_bar( stat = 'identity')+
   geom_errorbar( aes( ymax = mpg_gear_mean + sd , ymin = mpg_gear_mean - sd) , width = 0.25)</code></pre>
@@ -854,7 +855,7 @@ ggplot( mtcars , aes( x = mpg , y = hp)) +
           </h3>
           <p>
             R has a lot of advanced functionality for producing interactive graphics.
-            we can only offer a cursory glance into the full capabilities here.
+            We can only offer a cursory glance into the full capabilities here.
           </p>
           <table>
             <tr>
@@ -1051,6 +1052,84 @@ ggplot( mtcars , aes( x = mpg , y = hp)) +
             </p>
           </section>
 
+
+        </section>
+
+        <section align='left'>
+          <section align='center'>
+          <h2>
+            Working through an analysis script
+            </h2>
+            </section>
+
+          <section>
+          <h3>
+            Research Question
+          </h3>
+          <p>
+            Like any analysis, you have to start with a question.
+          </p>
+          <p>
+            For this analysis, we will be using the 'USPersonalExpenditure' dataset that is included with R.
+            To see this dataset, run the following code:
+          </p>
+          <pre><code class='r'>View(USPersonalExpenditure)</code></pre>
+            <p>
+              Our research question is simple:
+            </p>
+            <p>
+              RQ: Did personal expenditure on Private Education in the US increase between 1940 and 1960?
+            </p>
+        </section>
+
+          <section>
+            <div class='stretch'>
+            <pre><code class='r'>##title: My short analysis
+##author: Vijay
+
+# First we load the packages
+library(tidyr)
+library(ggplot2)
+
+pers_exp <- USPersonalExpenditure
+
+# Let's look at the data
+pers_exp	#it looks like the row names are not actually in the matrix
+		#let's fix that
+
+expenditure_type <- rownames(pers_exp)
+expenditure_type <- gsub( ' ' , '_' , expenditure_type)
+rownames(pers_exp) <- NULL
+pers_exp <- as.data.frame(pers_exp)
+pers_exp <- cbind(expenditure_type,pers_exp)
+
+# Let's look at the data now
+pers_exp	#better, but it doesn't look tidy to me
+		#let's fix that
+
+
+pers_exp <- gather( pers_exp , `1940` , `1945` , `1950` , `1955` , `1960` ,
+	key = year, value =  expenditure)
+pers_exp <- spread( pers_exp , key = expenditure_type , value = expenditure)
+
+# Let's look at the data now
+pers_exp	#better
+
+
+# Plot private education over time
+ggplot( pers_exp , aes( year , Private_Education))+
+	geom_bar(stat='identity')+
+	labs( x = 'Year' , y = 'Expenditure on private education\nin billions of $') +
+	theme_classic()</code></pre>
+              <pre><code class='r'>library(knitr)
+stitch('my-simple-report.r')</code></pre>
+            </div>
+          </section>
+
+          <section>
+            <object data='./resources/my-simple-report.pdf' class='stretch'>
+            </object>
+          </section>
         </section>
 
         </div>

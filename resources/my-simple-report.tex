@@ -77,7 +77,7 @@
 
 
 
-\title{ Check out my fancy report}
+\title{ My short analysis}
 
 \author{ Vijay%
 \thanks{This report is automatically generated with the R package \textbf{knitr}
@@ -89,22 +89,83 @@ The results below are generated from an R script.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcom{## Here is some text}
+\hlcom{# First we load the packages}
+\hlkwd{library}\hlstd{(tidyr)}
 \hlkwd{library}\hlstd{(ggplot2)}
-\hlkwd{ggplot}\hlstd{(mtcars,}\hlkwd{aes}\hlstd{(mpg,hp,}\hlkwc{colour}\hlstd{=}\hlkwd{as.factor}\hlstd{(gear)))}\hlopt{+}
-        \hlkwd{geom_point}\hlstd{()}
+
+\hlstd{pers_exp} \hlkwb{<-} \hlstd{USPersonalExpenditure}
+
+\hlcom{# Let's look at the data}
+\hlstd{pers_exp}        \hlcom{#it looks like the row names are not actually in the matrix}
+\end{alltt}
+\begin{verbatim}
+##                       1940   1945  1950 1955  1960
+## Food and Tobacco    22.200 44.500 59.60 73.2 86.80
+## Household Operation 10.500 15.500 29.00 36.5 46.20
+## Medical and Health   3.530  5.760  9.71 14.0 21.10
+## Personal Care        1.040  1.980  2.45  3.4  5.40
+## Private Education    0.341  0.974  1.80  2.6  3.64
+\end{verbatim}
+\begin{alltt}
+                \hlcom{#let's fix that}
+
+\hlstd{expenditure_type} \hlkwb{<-} \hlkwd{rownames}\hlstd{(pers_exp)}
+\hlstd{expenditure_type} \hlkwb{<-} \hlkwd{gsub}\hlstd{(} \hlstr{' '} \hlstd{,} \hlstr{'_'} \hlstd{, expenditure_type)}
+\hlkwd{rownames}\hlstd{(pers_exp)} \hlkwb{<-} \hlkwa{NULL}
+\hlstd{pers_exp} \hlkwb{<-} \hlkwd{as.data.frame}\hlstd{(pers_exp)}
+\hlstd{pers_exp} \hlkwb{<-} \hlkwd{cbind}\hlstd{(expenditure_type,pers_exp)}
+
+\hlcom{# Let's look at the data now}
+\hlstd{pers_exp}        \hlcom{#better, but it doesn't look tidy to me}
+\end{alltt}
+\begin{verbatim}
+##      expenditure_type   1940   1945  1950 1955  1960
+## 1    Food_and_Tobacco 22.200 44.500 59.60 73.2 86.80
+## 2 Household_Operation 10.500 15.500 29.00 36.5 46.20
+## 3  Medical_and_Health  3.530  5.760  9.71 14.0 21.10
+## 4       Personal_Care  1.040  1.980  2.45  3.4  5.40
+## 5   Private_Education  0.341  0.974  1.80  2.6  3.64
+\end{verbatim}
+\begin{alltt}
+                \hlcom{#let's fix that}
+
+
+\hlstd{pers_exp} \hlkwb{<-} \hlkwd{gather}\hlstd{( pers_exp , `1940` , `1945` , `1950` , `1955` , `1960` ,}
+        \hlkwc{key} \hlstd{= year,} \hlkwc{value} \hlstd{=  expenditure)}
+\hlstd{pers_exp} \hlkwb{<-} \hlkwd{spread}\hlstd{( pers_exp ,} \hlkwc{key} \hlstd{= expenditure_type ,} \hlkwc{value} \hlstd{= expenditure)}
+
+\hlcom{# Let's look at the data now}
+\hlstd{pers_exp}        \hlcom{#better}
+\end{alltt}
+\begin{verbatim}
+##   year Food_and_Tobacco Household_Operation Medical_and_Health Personal_Care
+## 1 1940             22.2                10.5               3.53          1.04
+## 2 1945             44.5                15.5               5.76          1.98
+## 3 1950             59.6                29.0               9.71          2.45
+## 4 1955             73.2                36.5              14.00          3.40
+## 5 1960             86.8                46.2              21.10          5.40
+##   Private_Education
+## 1             0.341
+## 2             0.974
+## 3             1.800
+## 4             2.600
+## 5             3.640
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Plot private education over time}
+\hlkwd{ggplot}\hlstd{( pers_exp ,} \hlkwd{aes}\hlstd{( year , Private_Education))}\hlopt{+}
+        \hlkwd{geom_bar}\hlstd{(}\hlkwc{stat}\hlstd{=}\hlstr{'identity'}\hlstd{)}\hlopt{+}
+        \hlkwd{labs}\hlstd{(} \hlkwc{x} \hlstd{=} \hlstr{'Year'} \hlstd{,} \hlkwc{y} \hlstd{=} \hlstr{'Expenditure on private education\textbackslash{}nin billions of $'}\hlstd{)} \hlopt{+}
+        \hlkwd{theme_classic}\hlstd{()}
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.6\linewidth]{figure/my-script-Rnwauto-report-1} 
+{\centering \includegraphics[width=.6\linewidth]{figure/my-simple-report-Rnwauto-report-1} 
 
 }
 
 
-\begin{kframe}\begin{alltt}
-\hlcom{#' Here is more text}
-\end{alltt}
-\end{kframe}
+
 \end{knitrout}
 
 The R session information (including the OS info, R version and all
@@ -151,7 +212,7 @@ packages used):
 \hlkwd{Sys.time}\hlstd{()}
 \end{alltt}
 \begin{verbatim}
-## [1] "2017-03-23 21:16:35 GMT"
+## [1] "2017-03-24 00:03:03 GMT"
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
