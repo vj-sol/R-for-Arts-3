@@ -77,7 +77,7 @@
 
 
 
-\title{ My short analysis}
+\title{ My simple report}
 
 \author{ Vijay%
 \thanks{This report is automatically generated with the R package \textbf{knitr}
@@ -92,6 +92,8 @@ The results below are generated from an R script.
 \hlcom{# First we load the packages}
 \hlkwd{library}\hlstd{(tidyr)}
 \hlkwd{library}\hlstd{(ggplot2)}
+\hlkwd{library}\hlstd{(Hmisc)}
+\hlkwd{library}\hlstd{(psych)}
 
 \hlstd{pers_exp} \hlkwb{<-} \hlstd{USPersonalExpenditure}
 
@@ -152,6 +154,39 @@ The results below are generated from an R script.
 ## 5             3.640
 \end{verbatim}
 \begin{alltt}
+\hlcom{# We should now look at some descriptive stats}
+\hlcom{# Let's use the describe function from the psych package}
+\hlstd{psych}\hlopt{::}\hlkwd{describe}\hlstd{(pers_exp)} \hlcom{# Okay, that's nice but we really just want the Private Education info}
+\end{alltt}
+\begin{verbatim}
+##                     vars n    mean    sd  median trimmed   mad     min     max range
+## year*                  1 5 1950.00  7.91 1950.00 1950.00  7.41 1940.00 1960.00 20.00
+## Food_and_Tobacco       2 5   57.26 25.12   59.60   57.26 22.39   22.20   86.80 64.60
+## Household_Operation    3 5   27.54 14.71   29.00   27.54 20.02   10.50   46.20 35.70
+## Medical_and_Health     4 5   10.82  7.00    9.71   10.82  6.36    3.53   21.10 17.57
+## Personal_Care          5 5    2.85  1.66    2.45    2.85  1.41    1.04    5.40  4.36
+## Private_Education      6 5    1.87  1.30    1.80    1.87  1.22    0.34    3.64  3.30
+##                      skew kurtosis    se
+## year*                0.00    -1.91  3.54
+## Food_and_Tobacco    -0.19    -1.81 11.23
+## Household_Operation  0.03    -2.01  6.58
+## Medical_and_Health   0.35    -1.77  3.13
+## Personal_Care        0.44    -1.58  0.74
+## Private_Education    0.15    -1.88  0.58
+\end{verbatim}
+\begin{alltt}
+\hlstd{psych}\hlopt{::}\hlkwd{describe}\hlstd{(pers_exp}\hlopt{$}\hlstd{Private_Education)}
+\end{alltt}
+\begin{verbatim}
+##    vars n mean  sd median trimmed  mad  min  max range skew kurtosis   se
+## X1    1 5 1.87 1.3    1.8    1.87 1.22 0.34 3.64   3.3 0.15    -1.88 0.58
+\end{verbatim}
+\begin{alltt}
+\hlcom{# This shows a difference between the minumum and maximum values}
+\hlcom{# with both th emean and median roughly in between.}
+\hlcom{# This would suggest a general change, but we cannot be sure of the direction.}
+\hlcom{# A plot might help with this}
+
 \hlcom{# Plot private education over time}
 \hlkwd{ggplot}\hlstd{( pers_exp ,} \hlkwd{aes}\hlstd{( year , Private_Education))}\hlopt{+}
         \hlkwd{geom_bar}\hlstd{(}\hlkwc{stat}\hlstd{=}\hlstr{'identity'}\hlstd{)}\hlopt{+}
@@ -161,6 +196,52 @@ The results below are generated from an R script.
 \end{kframe}
 
 {\centering \includegraphics[width=.6\linewidth]{figure/my-simple-report-Rnwauto-report-1} 
+
+}
+
+
+\begin{kframe}\begin{alltt}
+\hlcom{# This plot shows that expenditure on Private Education has increased between 1940 and 1960.}
+
+\hlcom{# Let's now see if the correlation between these values is significant}
+
+\hlcom{# First calculate correlation and p-value}
+\hlstd{cor_vals} \hlkwb{<-} \hlkwd{rcorr}\hlstd{( pers_exp}\hlopt{$}\hlstd{year , pers_exp}\hlopt{$}\hlstd{Private_Education )}
+
+\hlcom{# Straight up scatter plot}
+\hlkwd{ggplot}\hlstd{( pers_exp ,} \hlkwd{aes}\hlstd{(} \hlkwc{x} \hlstd{=} \hlkwd{as.numeric}\hlstd{(year) ,} \hlkwc{y} \hlstd{= Private_Education))} \hlopt{+}
+  \hlkwd{geom_point}\hlstd{()} \hlopt{+}
+  \hlkwd{geom_smooth}\hlstd{(}\hlkwc{method}\hlstd{=}\hlstr{'lm'}\hlstd{)} \hlopt{+}
+  \hlkwd{annotate}\hlstd{(}\hlstr{'text'} \hlstd{,} \hlkwc{x} \hlstd{=} \hlnum{1945} \hlstd{,} \hlkwc{y} \hlstd{=} \hlnum{3.2} \hlstd{,}
+    \hlkwc{label} \hlstd{=} \hlkwd{paste}\hlstd{(}\hlstr{'R^2 == '} \hlstd{,} \hlkwd{round}\hlstd{(cor_vals}\hlopt{$}\hlstd{r[}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{],}\hlnum{3}\hlstd{) ,} \hlkwc{sep}\hlstd{=}\hlstr{''}\hlstd{),} \hlkwc{parse} \hlstd{= T)} \hlopt{+}
+  \hlkwd{annotate}\hlstd{(}\hlstr{'text'} \hlstd{,} \hlkwc{x} \hlstd{=} \hlnum{1945} \hlstd{,} \hlkwc{y} \hlstd{=} \hlnum{3} \hlstd{,}
+    \hlkwc{label} \hlstd{=} \hlkwd{paste}\hlstd{(}\hlstr{'p =='}\hlstd{,} \hlkwd{round}\hlstd{(cor_vals}\hlopt{$}\hlstd{P[}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{],}\hlnum{5}\hlstd{) ,} \hlkwc{sep}\hlstd{=}\hlstr{''}\hlstd{),} \hlkwc{parse} \hlstd{= T)} \hlopt{+}
+  \hlkwd{labs}\hlstd{(}\hlkwc{x} \hlstd{=} \hlstr{'Year'} \hlstd{,} \hlkwc{y} \hlstd{=} \hlstr{'Expenditure on private education\textbackslash{}nin billions of $'}\hlstd{)} \hlopt{+}
+  \hlkwd{theme_classic}\hlstd{()}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=.6\linewidth]{figure/my-simple-report-Rnwauto-report-2} 
+
+}
+
+
+\begin{kframe}\begin{alltt}
+\hlcom{# Bar plot with scatter plot overlay}
+\hlkwd{ggplot}\hlstd{( pers_exp ,} \hlkwd{aes}\hlstd{(} \hlkwc{x} \hlstd{=} \hlkwd{as.numeric}\hlstd{(year) ,} \hlkwc{y} \hlstd{= Private_Education))} \hlopt{+}
+  \hlkwd{geom_bar}\hlstd{(}\hlkwc{stat}\hlstd{=}\hlstr{'identity'}\hlstd{)}\hlopt{+}
+  \hlkwd{geom_point}\hlstd{()} \hlopt{+}
+  \hlkwd{geom_smooth}\hlstd{(}\hlkwc{method}\hlstd{=}\hlstr{'lm'}\hlstd{)} \hlopt{+}
+  \hlkwd{annotate}\hlstd{(}\hlstr{'text'} \hlstd{,} \hlkwc{x} \hlstd{=} \hlnum{1945} \hlstd{,} \hlkwc{y} \hlstd{=} \hlnum{3.2} \hlstd{,}
+    \hlkwc{label} \hlstd{=} \hlkwd{paste}\hlstd{(}\hlstr{'R^2 == '} \hlstd{,} \hlkwd{round}\hlstd{(cor_vals}\hlopt{$}\hlstd{r[}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{],}\hlnum{3}\hlstd{) ,} \hlkwc{sep}\hlstd{=}\hlstr{''}\hlstd{),} \hlkwc{parse} \hlstd{= T)} \hlopt{+}
+  \hlkwd{annotate}\hlstd{(}\hlstr{'text'} \hlstd{,} \hlkwc{x} \hlstd{=} \hlnum{1945} \hlstd{,} \hlkwc{y} \hlstd{=} \hlnum{3} \hlstd{,}
+    \hlkwc{label} \hlstd{=} \hlkwd{paste}\hlstd{(}\hlstr{'p =='}\hlstd{,} \hlkwd{round}\hlstd{(cor_vals}\hlopt{$}\hlstd{P[}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{],}\hlnum{5}\hlstd{) ,} \hlkwc{sep}\hlstd{=}\hlstr{''}\hlstd{),} \hlkwc{parse} \hlstd{= T)} \hlopt{+}
+  \hlkwd{labs}\hlstd{(}\hlkwc{x} \hlstd{=} \hlstr{'Year'} \hlstd{,} \hlkwc{y} \hlstd{=} \hlstr{'Expenditure on private education\textbackslash{}nin billions of $'}\hlstd{)} \hlopt{+}
+  \hlkwd{theme_classic}\hlstd{()}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=.6\linewidth]{figure/my-simple-report-Rnwauto-report-3} 
 
 }
 
@@ -191,28 +272,26 @@ packages used):
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] Hmisc_4.0-1     Formula_1.2-1   survival_2.40-1 lattice_0.20-34 gdtools_0.1.4  
-##  [6] psych_1.6.12    tidyr_0.6.1     knitr_1.15.1    plotly_4.5.6    ggplot2_2.2.1  
+## [1] knitr_1.15.1    Hmisc_4.0-1     Formula_1.2-1   survival_2.40-1 lattice_0.20-34
+## [6] psych_1.6.12    ggplot2_2.2.1   tidyr_0.6.1    
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.10        RColorBrewer_1.1-2  plyr_1.8.4          highr_0.6          
-##  [5] base64enc_0.1-3     tools_3.3.2         rpart_4.1-10        base64_2.0         
-##  [9] digest_0.6.12       htmlTable_1.7       jsonlite_1.1        evaluate_0.10      
-## [13] tibble_1.2          gtable_0.2.0        viridisLite_0.1.3   Matrix_1.2-7.1     
-## [17] DBI_0.6             yaml_2.1.14         parallel_3.3.2      gridExtra_2.2.1    
-## [21] cluster_2.0.5       dplyr_0.5.0         httr_1.2.1          stringr_1.2.0      
-## [25] htmlwidgets_0.8     nnet_7.3-12         grid_3.3.2          data.table_1.10.0  
-## [29] svglite_1.2.0       R6_2.2.0            tcltk_3.3.2         foreign_0.8-67     
-## [33] latticeExtra_0.6-28 reshape2_1.4.2      purrr_0.2.2         magrittr_1.5       
-## [37] scales_0.4.1        htmltools_0.3.5     splines_3.3.2       assertthat_0.1     
-## [41] mnormt_1.5-5        colorspace_1.3-2    labeling_0.3        stringi_1.1.2      
-## [45] acepack_1.4.1       openssl_0.9.5       lazyeval_0.2.0      munsell_0.4.3
+##  [1] Rcpp_0.12.10        highr_0.6           RColorBrewer_1.1-2  plyr_1.8.4         
+##  [5] tools_3.3.2         digest_0.6.12       rpart_4.1-10        base64_2.0         
+##  [9] evaluate_0.10       tibble_1.2          gtable_0.2.0        htmlTable_1.7      
+## [13] Matrix_1.2-7.1      DBI_0.6             parallel_3.3.2      gridExtra_2.2.1    
+## [17] dplyr_0.5.0         stringr_1.2.0       cluster_2.0.5       grid_3.3.2         
+## [21] nnet_7.3-12         data.table_1.10.0   R6_2.2.0            foreign_0.8-67     
+## [25] latticeExtra_0.6-28 magrittr_1.5        htmltools_0.3.5     scales_0.4.1       
+## [29] splines_3.3.2       assertthat_0.1      mnormt_1.5-5        colorspace_1.3-2   
+## [33] labeling_0.3        stringi_1.1.2       acepack_1.4.1       lazyeval_0.2.0     
+## [37] openssl_0.9.5       munsell_0.4.3
 \end{verbatim}
 \begin{alltt}
 \hlkwd{Sys.time}\hlstd{()}
 \end{alltt}
 \begin{verbatim}
-## [1] "2017-03-24 00:03:03 GMT"
+## [1] "2017-03-24 10:23:19 GMT"
 \end{verbatim}
 \end{kframe}
 \end{knitrout}

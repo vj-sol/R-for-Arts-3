@@ -233,7 +233,7 @@ Providing your R <span style='display:inline;color:blue;margin-top:0'>objects</s
           <li class='fragment'>Explain ggplot2</li>
           <li class='fragment'>Demonstrate report generation tools</li>
           <li class='fragment'>Work through a full analysis script</li>
-          <li class='fragment'>Straight to projects</li>
+          <li class='fragment'>Straight to projects (no exercises)</li>
         </ol>
       </section>
     </section>
@@ -420,6 +420,7 @@ ggplotly(scatter)  </code></pre>
       <p>
         Controls the visual elements of the graph.
       </p>
+      <div class='fragment'>
       <p>
         This includes things such as whether we want a:
       <ul>
@@ -429,7 +430,8 @@ ggplotly(scatter)  </code></pre>
         <li>density plot</li>
       </ul>
       </p>
-    <p>
+      </div>
+    <p class='fragment'>
       Multiple geometric objects can be placed on the same graph.
     </p>
 
@@ -445,6 +447,7 @@ ggplotly(scatter)  </code></pre>
     <p>
       Controls the appearance of graph elements.
     </p>
+    <div class='fragment'>
     <p>
       This includes things such as an element's:
     <ul>
@@ -454,7 +457,8 @@ ggplotly(scatter)  </code></pre>
       <li>location</li>
     </ul>
     </p>
-  <p>
+    </div>
+  <p class='fragment'>
     Aesthetics can be set globally or locally.
   </p>
   </section>
@@ -489,22 +493,29 @@ ggplotly(scatter)  </code></pre>
   </h3>
 
   Many common ggplot tasks can be accomplished by adjusting the terms within the <pre style=display:inline><code style=display:inline class='r'>aes()</code></pre>
+  <div class='fragment'>
   <p>
     It is in this function that we define what is on our axes
   </p>
   <pre><code class='r'>ggplot(data = mtcars, aes(x = mpg, y = hp))</code></pre>
-  <p>
+  </div>
+  <div class='fragment'>
+   <p>
     And how we want to represent our data elements
   </p>
   <pre><code class='r'>ggplot(data = mtcars, aes(x = mpg, y = hp, colour = as.factor(vs), shape = as.factor(gear)))</code></pre>
-
+  </div>
+  <div class='fragment'>
   Note that both of these pieces of code will NOT work without a <pre style=display:inline><code style=display:inline class='r'>geom()</code></pre>
   <br/>
   <br/>
+  </div>
+  <div class='fragment'>
   Also, all aesthetics here have been defined globally.
   <p>
     A full list of aesthetic specifications can be found <a href='http://docs.ggplot2.org/current/vignettes/ggplot2-specs.html'>here</a>
   </p>
+  </div>
   <aside class='notes'>
   </aside>
 </section>
@@ -515,6 +526,7 @@ ggplotly(scatter)  </code></pre>
   </h3>
   This is where we define the type of graph that we want to produce.
   There are a large number of geoms to choose from.
+  <div class='fragment'>
   <p>
     Here are a few:
   </p>
@@ -527,6 +539,7 @@ ggplotly(scatter)  </code></pre>
       <tr><td><pre><code class='r'>geom_dotplot()</code></pre></td><td>Used to produce dot plots</td></tr>
     </tbody>
   </table>
+  </div>
 </section>
 
 <section>
@@ -590,6 +603,7 @@ ggplotly(scatter)  </code></pre>
     saving using ggplot2
   </h3>
   ggplot has a built in function to save plots, <pre style=display:inline><code style=display:inline class='r'>ggsave()</code></pre>
+  <div class='fragment'>
   <p>
     It is pretty easy to use and allows you to save in a number of formats:
   </p>
@@ -600,8 +614,11 @@ ggsave( 'my-plot.pdf' , my_plot )
 ggsave( 'my-plot.png' , my_plot )
 ggsave( 'my-plot.jpeg' , my_plot )
 ggsave( 'my-plot.svg' , my_plot ) # requires svglite package</code></pre>
+</div>
 
+    <div class='fragment'>
 <pre style=display:inline><code style=display:inline class='r'>ggsave()</code></pre> is rather clever and infers the file format from the file extension.
+    </div>
 </section>
 
   <section>
@@ -609,6 +626,7 @@ ggsave( 'my-plot.svg' , my_plot ) # requires svglite package</code></pre>
       saving using R
     </h3>
     Naturally, R also has functions to save images to file. The two that I use the most are <pre style=display:inline><code style=display:inline class='r'>pdf()</code></pre> and <pre style=display:inline><code style=display:inline class='r'>svg()</code></pre>
+    <div class='fragment'>
     <pre><code class='r'>my_plot <- ggplot( mtcars, aes( mpg , hp) +
   geom_point()
 
@@ -622,6 +640,7 @@ dev.off()
 </code></pre>
 
 Note that with these functions, you must close the graphics device after producing the image.
+</div>
 </section>
 
   </section>
@@ -781,9 +800,12 @@ mpg_gear$sd <- c( sd( mtcars$mpg[ mtcars$gear == 3 ] ) , sd( mtcars$mpg[ mtcars$
           <p>
             ggplot2 would be a pretty rubbish package if it didn't allow for custom labels.
           </p>
+          <div class='fragment'>
           Changing labels in ggplot2 is pretty straightforward and is similar to adding a geom.
           To do this, we use the <pre style='display:inline'><code style='display:inline' class='r'>labs()</code></pre> ggplot funtion.
         </div>
+        </div>
+        <div class='fragment'>
         <table style='font-size:80%'>
           <thead><th>Code</th><th>Function</th></thead>
           <tbody>
@@ -795,6 +817,7 @@ mpg_gear$sd <- c( sd( mtcars$mpg[ mtcars$gear == 3 ] ) , sd( mtcars$mpg[ mtcars$
             <tr><td><pre><code class='r'>labs(caption = 'Caption')</code></pre></td><td>Set the plot caption</td></tr>
           </tbody>
         </table>
+        </div>
       </section>
 
       <section>
@@ -857,6 +880,7 @@ ggplot( mtcars , aes( x = mpg , y = hp)) +
             R has a lot of advanced functionality for producing interactive graphics.
             We can only offer a cursory glance into the full capabilities here.
           </p>
+          <div class='fragment'>
           <table>
             <tr>
               <td>
@@ -869,8 +893,7 @@ ggplot( mtcars , aes( x = mpg , y = hp)) +
               </td>
             </tr>
           </table>
-
-
+          </div>
         </section>
 
         <section>
@@ -879,6 +902,7 @@ ggplot( mtcars , aes( x = mpg , y = hp)) +
           </h3>
 
           plotly has the built-in function <pre style=display:inline><code style=display:inline class='r'>ggplotly()</code></pre> for conversion of ggplot objects to interactive html files.
+          <div class='fragment'>
           <p>
             For instance, if we produce a simple ggplot object:
           </p>
@@ -890,6 +914,7 @@ ggplot( mtcars , aes( x = mpg , y = hp)) +
   </p>
   <pre><code class='r'>library(plotly)
   ggplotly(my_plot)</code></pre>
+  </div>
   </section>
 
           <section>
@@ -920,8 +945,8 @@ ggplot( mtcars , aes( x = mpg , y = hp)) +
             <p>
               Both R and plotly have a number of advanced functions for generating interactive graphs.
             </p>
-            <p>
-              What we have endeavoured to do here is to demonstrate how simple it can be.
+            <p class='fragment'>
+              What we have endeavoured to do here is to demonstrate how simple it can be (provided that your data are tidy!).
             </p>
           </section>
 
@@ -947,9 +972,10 @@ ggplot( mtcars , aes( x = mpg , y = hp)) +
             <p>
               R makes it easy to quickly produce a report of your data analysis.
             </p>
-            <p>
+            <p class='fragment'>
               This could be for something such as a supervisor meeting, progress review or draft conference submission.
             </p>
+            <div class='fragment'>
             <table>
               <tr>
                 <td>
@@ -962,6 +988,7 @@ ggplot( mtcars , aes( x = mpg , y = hp)) +
                 </td>
               </tr>
             </table>
+            </div>
           </section>
 
           <section>
@@ -971,14 +998,16 @@ ggplot( mtcars , aes( x = mpg , y = hp)) +
             <p>
               Knitr can output reports in a variety of formats (including .tex for LaTeX users) but two of the most useful formats are likely to be .pdf and .html
             </p>
+            <div class='fragment'>
             <p>
               Knitr, like ggplot and plotly, has a lot of advanced functionality but here we will focus on just two functions:
             </p>
             <pre><code class='r'># 1
-  stitch()
+stitch()
 
-  # 2
-  stitch_rhtml()</code></pre>
+# 2
+stitch_rhtml()</code></pre>
+            </div>
           </section>
 
           <section>
@@ -992,13 +1021,13 @@ ggplot( mtcars , aes( x = mpg , y = hp)) +
               For demonstration purposes, we will use the following script
             </p>
             <pre><code class='r'>##title: Check out my fancy report
-  ##author: Vijay
+##author: Vijay
 
-  # Here is some text
-  library(ggplot2)
-  ggplot(mtcars,aes(mpg,hp,colour=as.factor(gear)))+
+# Here is some text
+library(ggplot2)
+ggplot(mtcars,aes(mpg,hp,colour=as.factor(gear)))+
   geom_point()
-  # Here is more text</code></pre>
+# Here is more text</code></pre>
           </section>
 
           <section>
@@ -1006,6 +1035,7 @@ ggplot( mtcars , aes( x = mpg , y = hp)) +
               <pre style=text-transform:lowercase;display:inline><code style=text-transform:lowercase;display:inline class='r'>stitch()</code></pre>
             </h3>
             Using the <pre style=display:inline><code style=display:inline class='r'>stitch()</code></pre> function is straightforward if you have written a script.
+            <div class='fragment'>
             <p>
               The code to produce a pdf is simply:
             </p>
@@ -1013,6 +1043,12 @@ ggplot( mtcars , aes( x = mpg , y = hp)) +
             <p>
               If script is not in the working directory, you must specify the location of the file
             </p>
+            </div>
+            <div class='fragment'>
+            <p>
+              *note*: pdflatex is required to produce pdf files, see <a href='https://www.latex-project.org'>https://www.latex-project.org</a> for details.
+            </p>
+            </div>
           </section>
 
 <section>
@@ -1026,6 +1062,7 @@ ggplot( mtcars , aes( x = mpg , y = hp)) +
               <pre style=text-transform:lowercase;display:inline><code style=text-transform:lowercase;display:inline class='r'>stitch_rhtml()</code></pre>
             </h3>
             Using the <pre style=display:inline><code style=display:inline class='r'>stitch_rhtml()</code></pre> function is straightforward if you have written a script.
+            <div class='fragment'>
             <p>
               The code to produce a html file is simply:
             </p>
@@ -1033,6 +1070,7 @@ ggplot( mtcars , aes( x = mpg , y = hp)) +
             <p>
               If script is not in the working directory, you must specify the location of the file
             </p>
+            </div>
           </section>
 
           <section>
@@ -1047,7 +1085,7 @@ ggplot( mtcars , aes( x = mpg , y = hp)) +
             <p>
             Knitr is a powerful report generation tool and the features demonstrated here are really only scratching the surface.
             </p>
-            <p>
+            <p class='fragment'>
               It is possible to write entire research papers and websites using packages such as knitr, please do investigate it further.
             </p>
           </section>
@@ -1074,22 +1112,26 @@ ggplot( mtcars , aes( x = mpg , y = hp)) +
             To see this dataset, run the following code:
           </p>
           <pre><code class='r'>View(USPersonalExpenditure)</code></pre>
+            <div class='fragment'>
             <p>
               Our research question is simple:
             </p>
             <p>
               RQ: Did personal expenditure on Private Education in the US increase between 1940 and 1960?
             </p>
+            </div>
         </section>
 
           <section>
-            <div class='stretch'>
+            <div style='font-size:70%'>
             <pre><code class='r'>##title: My short analysis
 ##author: Vijay
 
 # First we load the packages
 library(tidyr)
 library(ggplot2)
+library(Hmisc)
+library(psych)
 
 pers_exp <- USPersonalExpenditure
 
@@ -1098,7 +1140,7 @@ pers_exp	#it looks like the row names are not actually in the matrix
 		#let's fix that
 
 expenditure_type <- rownames(pers_exp)
-expenditure_type <- gsub( ' ' , '_' , expenditure_type)
+expenditure_type <- gsub( ' ' , '_' , expenditure_type) # Replace spaces with underscores
 rownames(pers_exp) <- NULL
 pers_exp <- as.data.frame(pers_exp)
 pers_exp <- cbind(expenditure_type,pers_exp)
@@ -1115,12 +1157,52 @@ pers_exp <- spread( pers_exp , key = expenditure_type , value = expenditure)
 # Let's look at the data now
 pers_exp	#better
 
+# We should now look at some descriptive stats
+# Let's use the describe function from the psych package
+psych::describe(pers_exp) # Okay, that's nice but we really just want the Private Education info
+
+describe(pers_exp$Private_Education)
+
+# This shows a difference between the minumum and maximum values
+# with both th emean and median roughly in between.
+# This would suggest a general change, but we cannot be sure of the direction.
+# A plot might help with this
 
 # Plot private education over time
 ggplot( pers_exp , aes( year , Private_Education))+
 	geom_bar(stat='identity')+
 	labs( x = 'Year' , y = 'Expenditure on private education\nin billions of $') +
-	theme_classic()</code></pre>
+	theme_classic()
+# This plot shows that expenditure on Private Education has increased between 1940 and 1960.
+
+# Let's now see if the correlation between these values is significant
+
+# First calculate correlation and p-value
+cor_vals <- rcorr( pers_exp$year , pers_exp$Private_Education )
+
+# Straight up scatter plot
+ggplot( pers_exp , aes( x = as.numeric(year) , y = Private_Education)) +
+  geom_point() +
+  geom_smooth(method='lm') +
+  annotate('text' , x = 1945 , y = 3.2 ,
+    label = paste('R^2 == ' , round(cor_vals$r[1,2],3) , sep=''), parse = T) +
+  annotate('text' , x = 1945 , y = 3 ,
+    label = paste('p ==', round(cor_vals$P[1,2],5) , sep=''), parse = T) +
+  labs(x = 'Year' , y = 'Expenditure on private education\nin billions of $') +
+  theme_classic()
+
+# Bar plot with scatter plot overlay
+ggplot( pers_exp , aes( x = as.numeric(year) , y = Private_Education)) +
+  geom_bar(stat='identity')+
+  geom_point() +
+  geom_smooth(method='lm') +
+  annotate('text' , x = 1945 , y = 3.2 ,
+    label = paste('R^2 == ' , round(cor_vals$r[1,2],3) , sep=''), parse = T) +
+  annotate('text' , x = 1945 , y = 3 ,
+    label = paste('p ==', round(cor_vals$P[1,2],5) , sep=''), parse = T) +
+  labs(x = 'Year' , y = 'Expenditure on private education\nin billions of $') +
+  theme_classic()
+  </code></pre>
               <pre><code class='r'>library(knitr)
 stitch('my-simple-report.r')</code></pre>
             </div>
@@ -1131,6 +1213,50 @@ stitch('my-simple-report.r')</code></pre>
             </object>
           </section>
         </section>
+
+          <section align='left'>
+
+            <section align='center'>
+              <h2>
+                Projects
+              </h2>
+            </section>
+
+            <section>
+              <p>
+                Ulitimately you will have to perform an analysis in R by yourself.
+              </p>
+              <p>
+                So, we wanted to take the time today to allow you to work through a full analysis with our support.
+              </p>
+              <p>
+                Please feel free to either work in a group or on your own.
+              </p>
+              <p>
+                See next slide for more info...
+              </p>
+            </section>
+
+            <section>
+              <p>
+                You have two choices:
+              </p>
+              <ol>
+                <li type='A'>Work with one of R's built in datasets <pre style=display:inline><code style=display:inline class='r'>data()</code></pre>(easier)</li>
+                <li type='A'>Download a dataset from the <a href='https://data.gov.uk'>UK government database</a> (harder)</li>
+              </ol>
+              <p>
+                Once you have selected a dataset that appeals to you your task is to do the following:
+              </p>
+              <ol>
+                <li>Design a research question about your data</li>
+                <li>Import your data, tidy it and produce relevant descriptive stats</li>
+                <li>Generate plots that help to answer your research question</li>
+                <l>Use your script to produce a report using knitr</l>
+              </ol>
+            </section>
+
+          </section>
 
         </div>
       </div>
