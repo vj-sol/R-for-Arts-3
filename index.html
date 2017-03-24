@@ -582,8 +582,8 @@ ggplotly(scatter)  </code></pre>
       However, they can be used to overlay data.
     </p>
     <pre><code class='r'>ggplot(data = mtcars, aes(x = mpg, y = hp, colour = as.factor(vs), shape = as.factor(gear))) +
-+ geom_point()+
-+ geom_dotplot(aes(x=mpg,y=hp,fill=as.factor(vs)))
+  geom_point()+
+  geom_dotplot(aes(x=mpg,y=hp,fill=as.factor(vs)))
 #`stat_bindot()` using `bins = 30`. Pick better value with `binwidth`.
 </code></pre>
   </div>
@@ -698,7 +698,7 @@ Note that with these functions, you must close the graphics device after produci
       </h3>
       <div style='font-size:70%'>
         <pre style=display:inline><code style=display:inline class='r'>geom_smooth()</code></pre> aims to select the best smoothing method for your data but you can override this choice.
-        <pre><code class='r'>ggplot( mtcars , aes( x = mpg , y = hp)) +
+        <pre><code class='r'>ggplot( mtcars , aes( x = mpg , y = hp , colour = as.factor(vs))) +
     geom_point() +
     geom_smooth( aes( colour = as.factor(vs) ) , method='lm')
 </code></pre>
@@ -746,6 +746,15 @@ mpg_gear <- as.data.frame( cbind( mpg_gear_mean , gear ) )
 # add standard error and standard deviation to data frame
 mpg_gear$se <- c( describe( mtcars$mpg[ mtcars$gear == 3 ] )$se , describe( mtcars$mpg[ mtcars$gear == 4 ] )$se , describe( mtcars$mpg[ mtcars$gear == 5 ] )$se )
 mpg_gear$sd <- c( sd( mtcars$mpg[ mtcars$gear == 3 ] ) , sd( mtcars$mpg[ mtcars$gear == 4 ] ) , sd( mtcars$mpg[ mtcars$gear == 5 ] ) )
+
+# look at the data
+mpg_gear
+
+#  mpg_gear_mean gear        se       sd
+#1      16.10667    3 0.8705481 3.371618
+#2      24.53333    4 1.5232707 5.276764
+#3      21.38000    5 2.9779859 6.658979
+
 </code></pre>
   </section>
 
@@ -754,7 +763,7 @@ mpg_gear$sd <- c( sd( mtcars$mpg[ mtcars$gear == 3 ] ) , sd( mtcars$mpg[ mtcars$
           se bars: producing the plot
         </h3>
         <div style='font-size:80%'>
-          We now use the subset of data we created in the last slide to produce our plot with se bars
+          We now use the subset of data we created in the last slide to produce our plot with standard error bars
           <pre><code class='r'>ggplot( mpg_gear , aes(gear , mpg_gear_mean , fill = as.factor(gear)))+
   geom_bar( stat = 'identity')+
   geom_errorbar( aes( ymax = mpg_gear_mean + se, ymin = mpg_gear_mean - se) , width = 0.25)</code></pre>
@@ -843,7 +852,7 @@ mpg_gear$sd <- c( sd( mtcars$mpg[ mtcars$gear == 3 ] ) , sd( mtcars$mpg[ mtcars$
         <div style='font-size:70%'>
           Sometimes you might want to add a text overlay (eg. an r<sup>2</sup> value or a p value).
           We can do this using <pre style='display:inline'><code style='display:inline'class='r'>annotate()</code></pre>
-          <pre><code class='r'>library(Hmisc)
+          <pre><code class='r'>library(Hmisc) # load Hmisc package for the rcorr function. Warning, Hmisc may mask functions!
 cor_vals <- rcorr( mtcars$mpg , mtcars$hp)
 ggplot( mtcars , aes( x = mpg , y = hp)) +
   geom_point() +
@@ -1041,7 +1050,7 @@ ggplot(mtcars,aes(mpg,hp,colour=as.factor(gear)))+
             </p>
             <pre><code class='r'>stitch('my_script.r')</code></pre>
             <p>
-              If script is not in the working directory, you must specify the location of the file
+              If your script is not in the working directory, you must specify the location of the file
             </p>
             </div>
             <div class='fragment'>
@@ -1068,7 +1077,7 @@ ggplot(mtcars,aes(mpg,hp,colour=as.factor(gear)))+
             </p>
             <pre><code class='r'>stitch_rhtml('my_script.r')</code></pre>
             <p>
-              If script is not in the working directory, you must specify the location of the file
+              If your script is not in the working directory, you must specify the location of the file
             </p>
             </div>
           </section>
@@ -1159,12 +1168,14 @@ pers_exp	#better
 
 # We should now look at some descriptive stats
 # Let's use the describe function from the psych package
-psych::describe(pers_exp) # Okay, that's nice but we really just want the Private Education info
+psych::describe(pers_exp)
 
-describe(pers_exp$Private_Education)
+# Okay, that's nice but we really just want the Private Education info
+
+psych::describe(pers_exp$Private_Education)
 
 # This shows a difference between the minumum and maximum values
-# with both th emean and median roughly in between.
+# with both the mean and median roughly in between.
 # This would suggest a general change, but we cannot be sure of the direction.
 # A plot might help with this
 
@@ -1173,7 +1184,8 @@ ggplot( pers_exp , aes( year , Private_Education))+
 	geom_bar(stat='identity')+
 	labs( x = 'Year' , y = 'Expenditure on private education\nin billions of $') +
 	theme_classic()
-# This plot shows that expenditure on Private Education has increased between 1940 and 1960.
+# This plot shows that expenditure on Private Education has
+# increased between 1940 and 1960.
 
 # Let's now see if the correlation between these values is significant
 
@@ -1252,7 +1264,7 @@ stitch('my-simple-report.r')</code></pre>
                 <li>Design a research question about your data</li>
                 <li>Import your data, tidy it and produce relevant descriptive stats</li>
                 <li>Generate plots that help to answer your research question</li>
-                <l>Use your script to produce a report using knitr</l>
+                <li>Use your script to produce a report using knitr</li>
               </ol>
             </section>
 

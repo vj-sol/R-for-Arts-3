@@ -1,4 +1,4 @@
-##title: My simple report
+##title: My short analysis
 ##author: Vijay
 
 # First we load the packages
@@ -14,7 +14,7 @@ pers_exp	#it looks like the row names are not actually in the matrix
 		#let's fix that
 
 expenditure_type <- rownames(pers_exp)
-expenditure_type <- gsub( ' ' , '_' , expenditure_type)
+expenditure_type <- gsub( ' ' , '_' , expenditure_type) # Replace spaces with underscores
 rownames(pers_exp) <- NULL
 pers_exp <- as.data.frame(pers_exp)
 pers_exp <- cbind(expenditure_type,pers_exp)
@@ -33,12 +33,14 @@ pers_exp	#better
 
 # We should now look at some descriptive stats
 # Let's use the describe function from the psych package
-psych::describe(pers_exp) # Okay, that's nice but we really just want the Private Education info
+psych::describe(pers_exp)
+
+# Okay, that's nice but we really just want the Private Education info
 
 psych::describe(pers_exp$Private_Education)
 
 # This shows a difference between the minumum and maximum values
-# with both th emean and median roughly in between.
+# with both the mean and median roughly in between.
 # This would suggest a general change, but we cannot be sure of the direction.
 # A plot might help with this
 
@@ -47,7 +49,8 @@ ggplot( pers_exp , aes( year , Private_Education))+
 	geom_bar(stat='identity')+
 	labs( x = 'Year' , y = 'Expenditure on private education\nin billions of $') +
 	theme_classic()
-# This plot shows that expenditure on Private Education has increased between 1940 and 1960.
+# This plot shows that expenditure on Private Education has
+# increased between 1940 and 1960.
 
 # Let's now see if the correlation between these values is significant
 

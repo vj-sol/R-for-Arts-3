@@ -77,7 +77,7 @@
 
 
 
-\title{ My simple report}
+\title{ My short analysis}
 
 \author{ Vijay%
 \thanks{This report is automatically generated with the R package \textbf{knitr}
@@ -112,7 +112,7 @@ The results below are generated from an R script.
                 \hlcom{#let's fix that}
 
 \hlstd{expenditure_type} \hlkwb{<-} \hlkwd{rownames}\hlstd{(pers_exp)}
-\hlstd{expenditure_type} \hlkwb{<-} \hlkwd{gsub}\hlstd{(} \hlstr{' '} \hlstd{,} \hlstr{'_'} \hlstd{, expenditure_type)}
+\hlstd{expenditure_type} \hlkwb{<-} \hlkwd{gsub}\hlstd{(} \hlstr{' '} \hlstd{,} \hlstr{'_'} \hlstd{, expenditure_type)} \hlcom{# Replace spaces with underscores}
 \hlkwd{rownames}\hlstd{(pers_exp)} \hlkwb{<-} \hlkwa{NULL}
 \hlstd{pers_exp} \hlkwb{<-} \hlkwd{as.data.frame}\hlstd{(pers_exp)}
 \hlstd{pers_exp} \hlkwb{<-} \hlkwd{cbind}\hlstd{(expenditure_type,pers_exp)}
@@ -156,7 +156,7 @@ The results below are generated from an R script.
 \begin{alltt}
 \hlcom{# We should now look at some descriptive stats}
 \hlcom{# Let's use the describe function from the psych package}
-\hlstd{psych}\hlopt{::}\hlkwd{describe}\hlstd{(pers_exp)} \hlcom{# Okay, that's nice but we really just want the Private Education info}
+\hlstd{psych}\hlopt{::}\hlkwd{describe}\hlstd{(pers_exp)}
 \end{alltt}
 \begin{verbatim}
 ##                     vars n    mean    sd  median trimmed   mad     min     max range
@@ -175,6 +175,8 @@ The results below are generated from an R script.
 ## Private_Education    0.15    -1.88  0.58
 \end{verbatim}
 \begin{alltt}
+\hlcom{# Okay, that's nice but we really just want the Private Education info}
+
 \hlstd{psych}\hlopt{::}\hlkwd{describe}\hlstd{(pers_exp}\hlopt{$}\hlstd{Private_Education)}
 \end{alltt}
 \begin{verbatim}
@@ -183,7 +185,7 @@ The results below are generated from an R script.
 \end{verbatim}
 \begin{alltt}
 \hlcom{# This shows a difference between the minumum and maximum values}
-\hlcom{# with both th emean and median roughly in between.}
+\hlcom{# with both the mean and median roughly in between.}
 \hlcom{# This would suggest a general change, but we cannot be sure of the direction.}
 \hlcom{# A plot might help with this}
 
@@ -201,7 +203,8 @@ The results below are generated from an R script.
 
 
 \begin{kframe}\begin{alltt}
-\hlcom{# This plot shows that expenditure on Private Education has increased between 1940 and 1960.}
+\hlcom{# This plot shows that expenditure on Private Education has}
+\hlcom{# increased between 1940 and 1960.}
 
 \hlcom{# Let's now see if the correlation between these values is significant}
 
@@ -272,17 +275,17 @@ packages used):
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] knitr_1.15.1    Hmisc_4.0-1     Formula_1.2-1   survival_2.40-1 lattice_0.20-34
-## [6] psych_1.6.12    ggplot2_2.2.1   tidyr_0.6.1    
+## [1] tidyr_0.6.1     knitr_1.15.1    Hmisc_4.0-1     Formula_1.2-1   survival_2.40-1
+## [6] lattice_0.20-34 ggplot2_2.2.1   psych_1.6.12   
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.10        highr_0.6           RColorBrewer_1.1-2  plyr_1.8.4         
-##  [5] tools_3.3.2         digest_0.6.12       rpart_4.1-10        base64_2.0         
+##  [1] Rcpp_0.12.10        RColorBrewer_1.1-2  plyr_1.8.4          highr_0.6          
+##  [5] tools_3.3.2         rpart_4.1-10        digest_0.6.12       base64_2.0         
 ##  [9] evaluate_0.10       tibble_1.2          gtable_0.2.0        htmlTable_1.7      
 ## [13] Matrix_1.2-7.1      DBI_0.6             parallel_3.3.2      gridExtra_2.2.1    
-## [17] dplyr_0.5.0         stringr_1.2.0       cluster_2.0.5       grid_3.3.2         
+## [17] stringr_1.2.0       dplyr_0.5.0         cluster_2.0.5       grid_3.3.2         
 ## [21] nnet_7.3-12         data.table_1.10.0   R6_2.2.0            foreign_0.8-67     
-## [25] latticeExtra_0.6-28 magrittr_1.5        htmltools_0.3.5     scales_0.4.1       
+## [25] latticeExtra_0.6-28 magrittr_1.5        scales_0.4.1        htmltools_0.3.5    
 ## [29] splines_3.3.2       assertthat_0.1      mnormt_1.5-5        colorspace_1.3-2   
 ## [33] labeling_0.3        stringi_1.1.2       acepack_1.4.1       lazyeval_0.2.0     
 ## [37] openssl_0.9.5       munsell_0.4.3
@@ -291,7 +294,7 @@ packages used):
 \hlkwd{Sys.time}\hlstd{()}
 \end{alltt}
 \begin{verbatim}
-## [1] "2017-03-24 10:23:19 GMT"
+## [1] "2017-03-24 12:55:31 GMT"
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
